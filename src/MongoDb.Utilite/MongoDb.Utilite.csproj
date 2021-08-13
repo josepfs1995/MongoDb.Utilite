@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Isac Fuentes</Authors>
+    <Description>This is a framework from MongoDb orientaded in EntityFramework Core, but is basic.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/josepfs1995/MongoDb.Utilite</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/josepfs1995/MongoDb.Utilite</RepositoryUrl>
+    <PackageTags>MongoDB</PackageTags>
+    <PackageReleaseNotes>This is a framework from MongoDb orientaded in EntityFramework Core, but is basic.</PackageReleaseNotes>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.18" />
+  </ItemGroup>
+</Project>
