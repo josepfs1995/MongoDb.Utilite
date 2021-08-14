@@ -15,13 +15,23 @@ namespace MongoDb.Utilite.Tests
         {
             _serviceProvider = fixture.ServiceProvider;
         }
+        [Fact]
+        public void MongoUtilite_UpdatePersonaPorModelo_DebeDevolverSuccess()
+        {
+            var person = CreatePerson();
+            person.UniqueIdentifier = new System.Guid("d2c54351-3a16-48f0-87d0-7ccba5b16fc9");
+            person.Name = "Josep Fuentes";
+            var context = _serviceProvider.GetService<PersonDbContext>();
+            context.Personas.Update(person);
+            Assert.True(true);
+        }
         [Trait("Categoria", "POST")]
         [Fact]
         public async Task MongoUtilite_CrearPersona_DebeDevolverSuccess()
         {
             var person = CreatePerson();
             var context = _serviceProvider.GetService<PersonDbContext>();
-            await context.Personas.Add(person);
+            await context.Personas.AddAsync(person);
             person.Id.Should().NotBeEmpty("Al crear una persona el deberia autogenerar el Id");
         }
         [Trait("Categoria", "GET")]
@@ -51,8 +61,8 @@ namespace MongoDb.Utilite.Tests
             var context = _serviceProvider.GetService<PersonDbContext>();
             var persona = await context.Personas.FirstOrDefaultAsync(x => x.Name == nombre);
             persona.Age = 100;
-            await context.Personas.Update(x => x.Name == nombre, persona);
-            persona.Age.Should().BeGreaterOrEqualTo(100, "Deberia obtener a Carlos con 100 años");
+            await context.Personas.UpdateAsync(x => x.Name == nombre, persona);
+            persona.Age.Should().BeGreaterOrEqualTo(100, "Deberia obtener a Carlos con 100 aï¿½os");
         }
         [Trait("Categoria", "DELETE")]
         [Theory]
@@ -60,7 +70,7 @@ namespace MongoDb.Utilite.Tests
         public async Task MongoUtilite_EliminamosPersonaPorNombre_DebeDevolverSuccess(string nombre)
         {
             var context = _serviceProvider.GetService<PersonDbContext>();
-            await context.Personas.Delete(x => x.Name == nombre);
+            await context.Personas.DeleteAsync(x => x.Name == nombre);
 
             var persona = await context.Personas.FirstOrDefaultAsync(x => x.Name == nombre);
             persona.Should().BeNull("Deberia devolver Nulo ya que fue eliminada");
@@ -69,6 +79,7 @@ namespace MongoDb.Utilite.Tests
         {
             return new Bogus.Faker<Person>()
                  .RuleFor(x => x.Name, f => f.Person.FirstName)
+                 .RuleFor(x => x.LastName, f => f.Person.LastName)
                  .RuleFor(x => x.Age, f => f.Random.Number(10, 40))
                  .Generate();
         }

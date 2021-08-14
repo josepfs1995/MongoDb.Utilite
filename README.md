@@ -18,6 +18,9 @@ public class Person
 {
    //Id is necessary
    public Guid Id { get; set; }
+   //This is neccesary for update with model.
+   [UniqueIdentifier] 
+   public Guid UniqueIdentifier {get;set;}
    public string Name { get; set; }
    public int Age { get; set; }
 }
@@ -81,15 +84,15 @@ public class Person
   }
   //Get
   public async Task<IEnumerable<Person>> Get(string name){
-      await _context.Person.FirstOrDefault(x=> x.Name == name);  
+      await _context.Person.FirstOrDefaultAsync(x=> x.Name == name);  
   }
   //Edit
   public async Task<IEnumerable<Person>> Get(Person person){
-      await _context.Person.Update(x=> x.Name == name, person);  
+      await _context.Person.UpdateAsync(x=> x.Name == name, person);  
   }
   //Delete
  public async Task<IEnumerable<Person>> Delete(string name){
-      await _context.Person.Delete(x=> x.Name == name);  
+      await _context.Person.DeleteAsync(x=> x.Name == name);  
   }
 ```
 ## Contributing

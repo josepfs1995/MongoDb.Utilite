@@ -8,6 +8,7 @@
     <RepositoryUrl>https://github.com/josepfs1995/MongoDb.Utilite</RepositoryUrl>
     <PackageTags>MongoDB</PackageTags>
     <PackageReleaseNotes>This is a framework from MongoDb orientaded in EntityFramework Core, but is basic.</PackageReleaseNotes>
+    <Version>1.1.0</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
